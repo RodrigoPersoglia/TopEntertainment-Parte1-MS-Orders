@@ -32,21 +32,13 @@ namespace TopEntertainment.Ordenes.Application.Services
         {
             try
             {
-                //var carrito = _carritoRepository.GetCarritoById(compra.UsuarioId);
                 var carrito = _carritoRepository.getCarritoPendienteById(compra.UsuarioId);
                 var game = _carritoRepository.GetCarritoPorID(compra.UsuarioId);
                 carrito.EstadoID = 2;
                 _carritoRepository.Update(carrito);
                 Compra compraPrueba = new Compra() { CarritoId = carrito.Id, UsuarioId = compra.UsuarioId, FechaHora = compra.FechaHora, ImporteFinal = compra.Importe };
-                //var compraMap = _mapper.Map<Compra>(compra);
                 var compraMap = _mapper.Map<Compra>(compraPrueba);
-
-
                 _repository.Add(compraMap);
-
-
-
-
                 return compraMap;
             }
             catch (Exception)
@@ -64,9 +56,7 @@ namespace TopEntertainment.Ordenes.Application.Services
 
             foreach (var compra in test)
             {
-                //var carrito = _carritoRepository.GetCarritoById(compra.UsuarioId);
                 var carrito = _carritoRepository.getCarritoIndividual(compra.CarritoId);
-                //var juego = _carritoRepository.tenerJuegoCarrito(carrito.Id);
                 var juego = _carritoRepository.tenerJuegoCarrito(carrito.Id);
                 var clienteMappeado = _mapper.Map<CompraOnView2DTO>(compra);
 
@@ -76,7 +66,6 @@ namespace TopEntertainment.Ordenes.Application.Services
                     string juegoAgregar = ("ProductoId :" + iterador.ProductoId + "  Cantidad : " + +iterador.Cantidad);
                     clienteMappeado.Comprobante.Add(juegoAgregar);
                 }
-
 
                 compraMapeada.Add(clienteMappeado);
             }

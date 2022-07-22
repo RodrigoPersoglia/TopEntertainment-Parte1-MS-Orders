@@ -9,8 +9,6 @@ namespace TopEntertainment.Ordenes.AccessData
 
         public OrdenesContext(DbContextOptions<OrdenesContext> options) : base(options) { }
         public virtual DbSet<Compra> Compras { get; set; }
-        //public virtual DbSet<Carrito> Carritos { get; set; }
-        //public virtual DbSet<CarritoDetalle> CarritoDetalles { get; set; }
         public virtual DbSet<Carrito> Carritos { get; set; }
         public virtual DbSet<JuegoCarrito> JuegoCarrito { get; set; }
         public virtual DbSet<EstadoDetalle> EstadoDetalles { get; set; }

@@ -15,29 +15,7 @@ namespace TopEntertainment.Ordenes.Presentation.Controllers
         {
             _service = service;
         }
-        /*
 
-        [HttpGet("/CarritoPorId/")]
-        public IActionResult GetCarritoById(int id)
-        {
-            try
-            {
-                var CarritoEntity = _service.GetCarritoById(id);
-
-                if (CarritoEntity != null)
-                {
-                    return new JsonResult(CarritoEntity) { StatusCode = 200 };
-                }
-
-                return NotFound();
-            }
-            catch (Exception)
-            {
-                return StatusCode(500, "Internal server error");
-            }
-        }
-
-        */
         [HttpPost("AñadirJuego")]
         [ProducesResponseType(typeof(CarritoJuegoDTO), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -98,7 +76,6 @@ namespace TopEntertainment.Ordenes.Presentation.Controllers
                 return BadRequest(e.Message);
             }
 
-            //return StatusCode(200, "Cantidad actualizada correctamente");
         }
 
         [HttpGet("ObtenerCarrito")]

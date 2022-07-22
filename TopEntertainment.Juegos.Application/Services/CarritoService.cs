@@ -21,11 +21,10 @@ namespace TopEntertainment.Ordenes.Application.Services
     public class CarritoService : ICarritoService
     {
         private readonly ICarritoRepository _repository;
-        // private readonly ICarritoService _querie;
-        public CarritoService(ICarritoRepository repository)//, ICarritoService querie)
+
+        public CarritoService(ICarritoRepository repository)
         {
             _repository = repository;
-            // _querie = querie;
         }
         public void AddCarrito(int cliente)
         {
@@ -61,7 +60,6 @@ namespace TopEntertainment.Ordenes.Application.Services
             var url = "https://localhost:7284/juegos/hayStock";
             HttpClient juegoCliente = new HttpClient();
             var juego = juegoCliente.GetAsync($"{url}/{id}");
-            //var respuesta = juego.
 
             return true;
         }
@@ -71,20 +69,7 @@ namespace TopEntertainment.Ordenes.Application.Services
             var juego = _repository.getCarritoPendienteById(carritoDetalle.UsuarioId);
 
             var comprobar = _repository.GetJuegoPorProducto(carritoDetalle.ProductoId, juego.Id);
-            /*
-            if(comprobar == null)
-            {
-                throw new FormatException();
-            }
-            else
-            {
-                _repository.addJuego(juego.Id, carritoDetalle);
-                hayStock(carritoDetalle.ProductoId);
-                stockMenos(juego.Id);
-            }
-            */
             _repository.addJuego(juego.Id, carritoDetalle);
-            //hayStock(carritoDetalle.ProductoId);
             stockMenos(carritoDetalle.ProductoId);
 
         }
@@ -98,10 +83,8 @@ namespace TopEntertainment.Ordenes.Application.Services
 
         public void eliminarJuegoCarrito(int idCliente, int idProducto)
         {
-            //var carrito = _repository.GetCarritoById(idCliente);
             var carrito = _repository.getCarritoPendienteById(idCliente);
             var juego = _repository.GetJuegoPorProducto(idProducto, carrito.Id);
-
             _repository.eliminarJuego(juego);
             stockMas(idProducto);
         }
@@ -113,7 +96,6 @@ namespace TopEntertainment.Ordenes.Application.Services
 
         public void modificarCantidad(int cantidad, int idProducto, int idCliente)
         {
-            //var carrito = _repository.GetCarritoById(idCliente);
             var carrito = _repository.getCarritoPendienteById(idCliente);
             var juego = _repository.GetJuegoPorProducto(idProducto, carrito.Id);
             _repository.modificarCantidad(juego, cantidad);
@@ -135,11 +117,8 @@ namespace TopEntertainment.Ordenes.Application.Services
                 return carritoCompleto;
             }
             else { AddCarrito(idCliente); return carritoCompleto(idCliente); }
-
-
-
-
         }
+
         public List<Carrito> obtenerCarrito()
         {
             return _repository.tenerTodosLosCarritos();

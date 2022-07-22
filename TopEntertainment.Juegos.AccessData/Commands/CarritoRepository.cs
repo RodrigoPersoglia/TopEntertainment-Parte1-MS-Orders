@@ -30,14 +30,6 @@ namespace TopEntertainment.Ordenes.AccessData.Commands
 
             return carritoDev;
         }
-        /*
-        public List<JuegoCarrito> getCarritoDetalleById(int id)
-        {
-            var carritoDev = (from carrito in _context.JuegoCarrito
-                              where carrito.Id == id
-                              select carrito).ToList();
-        }
-        */
 
         public Carrito getCarritoIndividual(int id)
         {
